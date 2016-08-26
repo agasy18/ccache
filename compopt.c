@@ -56,7 +56,7 @@ static const struct compopt compopts[] = {
 	{"-arch",           TAKES_ARG},
 	{"-aux-info",       TAKES_ARG},
 	{"-b",              TAKES_ARG},
-	{"-fmodules",       TOO_HARD},
+    {"-ivfsoverlay",    TAKES_ARG},
 	{"-fno-working-directory", AFFECTS_CPP},
 	{"-fplugin=libcc1plugin", TOO_HARD}, /* interaction with GDB */
 	{"-frepo",          TOO_HARD},

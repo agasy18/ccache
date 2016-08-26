@@ -1938,6 +1938,10 @@ cc_process_args(struct args *args, struct args **preprocessor_args,
 
 	for (i = 1; i < argc; i++) {
 		/* The user knows best: just swallow the next arg */
+        cc_log(" ======================== iter start ======================");
+        cc_log("Arg: %s", argv[i]);
+        cc_log("input_file: %s", input_file);
+
 		if (str_eq(argv[i], "--ccache-skip")) {
 			i++;
 			if (i == argc) {
@@ -2412,6 +2416,9 @@ cc_process_args(struct args *args, struct args **preprocessor_args,
 			relpath = make_relative_path(x_strdup(argv[i] + 2));
 			option = format("-%c%s", argv[i][1], relpath);
 
+            cc_log("Slash option %s", option);
+            cc_log("Slash option %s", relpath);
+
 			if (compopt_short(compopt_affects_cpp, argv[i])) {
 				args_add(cpp_args, option);
 			} else {
@@ -2439,6 +2446,9 @@ cc_process_args(struct args *args, struct args **preprocessor_args,
 				args_add(stripped_args, argv[i]);
 				args_add(stripped_args, argv[i+1]);
 			}
+
+            cc_log("Other argument %s", argv[i]);
+            cc_log("Other argument %s", argv[i+1]);
 
 			i++;
 			continue;
@@ -2486,6 +2496,7 @@ cc_process_args(struct args *args, struct args **preprocessor_args,
 
 		/* The source code file path gets put into the notes */
 		if (generating_coverage) {
+            cc_log("if (generating_coverage) 2667: %s", argv[i]);
 			input_file = x_strdup(argv[i]);
 			continue;
 		}
