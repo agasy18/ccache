@@ -116,6 +116,8 @@ parse_sloppiness(const char *str, void *result, char **errmsg)
 			*value |= SLOPPY_PCH_DEFINES;
 		} else if (str_eq(word, "time_macros")) {
 			*value |= SLOPPY_TIME_MACROS;
+		} else if (str_eq(word, "disable_preprocessor")) {
+			*value |= SLOPPY_DISABLE_PREPROCESSOR;
 		} else {
 			*errmsg = format("unknown sloppiness: \"%s\"", word);
 			free(p);
@@ -639,6 +641,9 @@ conf_print_items(struct conf *conf,
 	}
 	if (conf->sloppiness & SLOPPY_NO_SYSTEM_HEADERS) {
 		reformat(&s, "%sno_system_headers, ", s);
+	}
+	if (conf->sloppiness & SLOPPY_DISABLE_PREPROCESSOR) {
+		reformat(&s, "%sdisable_preprocessor, ", s);
 	}
 	if (conf->sloppiness) {
 		// Strip last ", ".
